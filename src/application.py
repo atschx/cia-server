@@ -1,5 +1,6 @@
 #! /usr/bin/env python
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
+
 from handler.collect import UserActionCollectHandler 
 
 import tornado.autoreload
