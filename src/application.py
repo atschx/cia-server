@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from handler.collect import UserActionCollectHandler 
 
@@ -12,14 +12,7 @@ import logging
 import signal
 import os.path
 
-# define("mid", default="1", help="Machine id")
-# define("port", default=4000, help="port to run")
-# define("notifylog", help="notify log file")
-# define("debug", default=True, help="is debug model?", type=bool)
 
-'''
-test
-'''
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [(r'/collectd',UserActionCollectHandler)]
@@ -27,6 +20,7 @@ class Application(tornado.web.Application):
             template_path=os.path.join(os.path.dirname(__file__), 'web')
         )
         tornado.web.Application.__init__(self, handlers, **settings)
+
 
 def main():
     # signal.signal(signal.SIGTERM,onsignal_term)    
