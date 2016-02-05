@@ -1,38 +1,19 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from handler.collect import UserActionCollectHandler 
+from handler.collect import CiaCollectdHandler
 
-import tornado.autoreload
-import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-import config
-import logging
-import signal
-import os.path
 
-
-class Application(tornado.web.Application):
-    def __init__(self):
-        handlers = [(r'/collectd',UserActionCollectHandler)]
-        settings = dict(
-            template_path=os.path.join(os.path.dirname(__file__), 'web')
-        )
-        tornado.web.Application.__init__(self, handlers, **settings)
+application = tornado.web.Application([
+    (r'/collectd', CiaCollectdHandler),
+])
 
 
 def main():
-    # signal.signal(signal.SIGTERM,onsignal_term)    
-    # options.parse_command_line()
-    # init_logging(options)
-    http_server = tornado.httpserver.HTTPServer(Application())
-    http_server.listen(4000)
-    ioloop = tornado.ioloop.IOLoop.instance()
-    # if config.debug:
-    #     tornado.autoreload.start(ioloop)
-    # logging.info('server listen at %d', options.port)
-    ioloop.start()
+    application.listen(4000)
+    tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == '__main__':
-    main();
+    main()

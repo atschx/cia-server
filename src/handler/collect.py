@@ -7,7 +7,7 @@ import redis
 import uuid
 
 
-class UserActionCollectHandler(tornado.web.RequestHandler):
+class CiaCollectdHandler(tornado.web.RequestHandler):
 
     @property
     def redis_conn(self):
@@ -18,16 +18,19 @@ class UserActionCollectHandler(tornado.web.RequestHandler):
 
     def post(self):
         try:
-            headers = self.request.headers
-            print headers
-            body = self.request.body
-            alexa = json.loads(body)
-            print alexa['cdt'], alexa['url'], alexa['ref']
-            print "---------------------------------------"
-            uuid_str=uuid.uuid1()
+            print self.request.remote_ip, self.request.headers['X-Real-IP'], self.request.body
+
+            alexa = json.loads(self.request.body)
+
+            # params
+            uuid_str = uuid.uuid1()
             self.redis_conn.hset(uuid_str, "cdt", alexa['cdt'])
             self.redis_conn.hset(uuid_str, "url", alexa['url'])
             self.redis_conn.hset(uuid_str, "ref", alexa['ref'])
+
+            # worker
+            self.redis_conn.lpush("alexa_robot_worker", uuid_str)
+
             # print headers,body
         except Exception, e:
             print e
