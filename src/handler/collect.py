@@ -10,7 +10,11 @@ import uuid
 class UserActionCollectHandler(tornado.web.RequestHandler):
 
     def __init__(self):
+        """
+        redis-connect
+        """
         self.redis_conn = redis.Redis(host='127.0.0.1', port=6379)
+        super(UserActionCollectHandler, self).__init__()
 
     def get(self):
         self.post()
