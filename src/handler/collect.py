@@ -9,12 +9,9 @@ import uuid
 
 class UserActionCollectHandler(tornado.web.RequestHandler):
 
-    def __init__(self):
-        """
-        redis-connect
-        """
-        self.redis_conn = redis.Redis(host='127.0.0.1', port=6379)
-        super(UserActionCollectHandler, self).__init__()
+    @property
+    def redis_conn(self):
+        return redis.Redis(host='127.0.0.1', port=6379)
 
     def get(self):
         self.post()
@@ -22,14 +19,15 @@ class UserActionCollectHandler(tornado.web.RequestHandler):
     def post(self):
         try:
             headers = self.request.headers
+            print json.dump(headers)
             body = self.request.body
             alexa = json.loads(body)
             print alexa['cdt'], alexa['url'], alexa['ref']
             print "---------------------------------------"
-            uuidStr=uuid.uuid1()
-            self.redis_conn.hset(uuidStr, "cdt", alexa['cdt'])
-            self.redis_conn.hset(uuidStr, "url", alexa['url'])
-            self.redis_conn.hset(uuidStr, "ref", alexa['ref'])
+            uuid_str=uuid.uuid1()
+            self.redis_conn.hset(uuid_str, "cdt", alexa['cdt'])
+            self.redis_conn.hset(uuid_str, "url", alexa['url'])
+            self.redis_conn.hset(uuid_str, "ref", alexa['ref'])
             # print headers,body
-        except Exception , e:
+        except Exception, e:
             print e
