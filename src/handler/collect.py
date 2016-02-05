@@ -3,6 +3,7 @@
 
 import tornado.web
 import simplejson as json
+import redis
 
 
 class UserActionCollectHandler(tornado.web.RequestHandler):
@@ -14,8 +15,9 @@ class UserActionCollectHandler(tornado.web.RequestHandler):
         try:
             headers = self.request.headers
             body = self.request.body
-            # json.loads(body)
-            print body
+            alexa = json.loads(body)
+            print alexa['cdt'], alexa['ref'], alexa['url']
+            print "---------------------------------------"
             # print headers,body
         except Exception , e:
             print e
