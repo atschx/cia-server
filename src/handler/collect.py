@@ -19,7 +19,7 @@ class UserActionCollectHandler(tornado.web.RequestHandler):
     def post(self):
         try:
             headers = self.request.headers
-            print json.dump(headers)
+            print headers
             body = self.request.body
             alexa = json.loads(body)
             print alexa['cdt'], alexa['url'], alexa['ref']
