@@ -64,12 +64,12 @@ if __name__ == '__main__':
     ua="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36"
 
 
-    cli="10"
-    ver="alxg-3.3"
-    dat="ns"
-    cdt=buildCDT()
-    ref=""
-    url="http://atschx.com"
+    # cli="10"
+    # ver="alxg-3.3"
+    # dat="ns"
+    # cdt=buildCDT()
+    # ref=""
+    # url="http://atschx.com"
 
     queryStr = {'cli':cli,'dat':dat,'cdt':cdt,'ref':ref,'url':url}
 
