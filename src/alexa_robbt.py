@@ -1,15 +1,31 @@
 #!/usr/bin/env python
-# encoding=utf8
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+# -*- coding: utf-8 -*-
 
 import urllib
-import redis
+# import redis
 # import datetime
 
+'''
+1. fetch aid from data.alexa.com
+2. send_request to data.alexa.com use get
+3. random compose
+'''
 
-def sendRequest(url):
+AID_GEN_URL = "https://data.alexa.com/data?cli=10&stc"
+
+
+def gen_aid():
+    """
+    模拟生成aid,注意事项:
+    1.发送请求时的ua
+    2.server返回的Header中`Set-cookie`信息
+    """
+    print '发送GET请求到{%s}获取aid' % AID_GEN_URL
+    # xml 解析处理
+    print "获取"
+
+
+def send_request(url):
     buff = urllib2.open(url)
     result = buff.open(url).read()
     buff.close()

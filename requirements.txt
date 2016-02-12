@@ -1,3 +1,4 @@
 tornado
 simplejson
 redis
+httplib2
