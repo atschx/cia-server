@@ -6,13 +6,12 @@ import urllib
 # import datetime
 
 '''
-1. fetch aid from data.alexa.com
+1. fetch aid from data.alexa.com(from alexa_aid_pool)
 2. send_request to data.alexa.com use get
 3. random compose
 '''
 
-AID_GEN_URL = "https://data.alexa.com/data?cli=10&stc"
-
+DATA_ALEXA_URL = "https://data.alexa.com/data/%s?%s&cdt=%s&ref=%s&url=%s"
 
 def gen_aid():
     """

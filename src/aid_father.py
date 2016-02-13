@@ -3,9 +3,12 @@
 
 from xml.parsers.expat import ParserCreate
 import redis
-import httplib2
+
 
 class AidGenerator(object):
+    """
+    just for test
+    """
 
     @property
     def redis_conn(self):
@@ -23,8 +26,7 @@ class AidGenerator(object):
         try:
             aid = attrs['AID']
             if aid is not None:
-                self.redis_conn.sadd("alexa_aid_pool",attrs['AID'])
-                    # setnx("alexa_aid_pool", attrs['AID'])
+                self.redis_conn.sadd("alexa_aid_pool", attrs['AID'])
         finally:
             print name, str(attrs)
 
@@ -38,14 +40,4 @@ if __name__ == '__main__':
     parser = ParserCreate()
     parser.StartElementHandler = AidGenerator().extra_aid_to_redis
     parser.Parse(xml)
-    #
-    # handler = AlexaAIDSaxHandler()
-    #
-    #
-    # parser.returns_unicode = True
-    #
-    # parser.StartElementHandler = handler.start_element
-    # parser.EndElementHandler = handler.end_element
-    # parser.CharacterDataHandler = handler.char_data
-    #
-    # parser.Parse(xml)
+
