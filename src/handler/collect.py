@@ -27,6 +27,7 @@ class CiaCollectdHandler(tornado.web.RequestHandler):
             self.redis_conn.hset(uuid_str, "cdt", alexa['cdt'])
             self.redis_conn.hset(uuid_str, "url", alexa['url'])
             self.redis_conn.hset(uuid_str, "ref", alexa['ref'])
+            self.redis_conn.expire(uuid_str, 3600)
 
             # worker
             self.redis_conn.lpush("alexa_robot_worker", uuid_str)
