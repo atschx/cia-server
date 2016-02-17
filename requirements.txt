@@ -2,3 +2,5 @@ tornado
 simplejson
 redis
 httplib2
+celery
+"celery[redis]"

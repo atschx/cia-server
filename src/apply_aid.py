@@ -27,7 +27,6 @@ class AidGenerator(object):
             aid = attrs['AID']
             if aid is not None:
                 self.redis_conn.sadd("alexa_aid_pool", attrs['AID'])
-                    # setnx("alexa_aid_pool", attrs['AID'])
         finally:
             print name, str(attrs)
 
@@ -35,8 +34,6 @@ class AidGenerator(object):
 def get_aid():
     conn = httplib2.Http()
     headers = {
-        # Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36
-        # (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:44.0) Gecko/20100101 Firefox/44.0"
     }
     uri = "https://data.alexa.com/data?cli=10&stc"

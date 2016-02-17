@@ -18,7 +18,10 @@ class CiaCollectdHandler(tornado.web.RequestHandler):
 
     def post(self):
         try:
-            print self.request.remote_ip, self.request.headers['X-Real-IP'], self.request.body
+            print self.request.remote_ip, \
+                self.request.headers['X-Real-IP'], \
+                self.request.body, \
+                self.request.headers['User-Agent']
 
             alexa = json.loads(self.request.body)
 
@@ -33,6 +36,5 @@ class CiaCollectdHandler(tornado.web.RequestHandler):
             self.redis_conn.lpush("alexa_robot_worker", uuid_str)
             self.redis_conn.expire(uuid_str, 86400)
 
-            # print headers,body
         except Exception, e:
             print e
