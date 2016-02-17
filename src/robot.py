@@ -55,11 +55,6 @@ if __name__ == '__main__':
                        "http://atschx.com/"
                        ])
 
-    for i in range(10):
-        print random.sample(TARGET_URLS, 1)[0]
-        print random.sample(BASES, 1)[0]
-        send_to_alexa.delay(random.sample(TARGET_URLS, 1)[0])
-
     redis_conn = redis.Redis(host='127.0.0.1', port=6379)
     queue = redis_conn.llen("alexa_robot_worker")
     if queue is not None:
